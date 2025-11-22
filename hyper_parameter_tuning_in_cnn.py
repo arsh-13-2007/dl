@@ -104,9 +104,16 @@ tuner.search(X_train , y_train , epochs= 4 , validation_split = 0.2 )
 print(tuner.get_best_hyperparameters()[0].values)  
 
 model = tuner.get_best_models(num_models=1)[0]
-
-
-history = model.fit( X_train , y_train ,batch_size= 32 , epochs=12 , initial_epoch= 4 , validation_data =(X_test , y_test)  )
+callback = EarlyStopping(
+    monitor="val_loss",
+    min_delta=0,
+    patience=2,
+    verbose=0,
+    mode="auto",
+    baseline=None,
+    restore_best_weights=False
+)
+history = model.fit( X_train , y_train ,batch_size= 32 , epochs=12 , initial_epoch= 4 , validation_data =(X_test , y_test), callbacks = callback  )
 
 
 
