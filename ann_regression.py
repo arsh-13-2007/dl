@@ -6,7 +6,7 @@ from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow 
-import keras
+# import keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
