@@ -39,13 +39,11 @@ x_test =X_test.reshape(len(X_test) , 28 , 28 ,1 )
 # model.add(Flatten())
 
 # model.add( Dense(128 , acitvation='relu' ))
+# model.add( dense(128  , activation='relu'))
 # model.add( Dense(64 , activation='relu '))
 # model.add( Dense(1, activation='sigmoid'))
 
 # model.
-
-
-
 
 
 def build_model(hp):
@@ -54,8 +52,7 @@ def build_model(hp):
 
     for i in range(hp.Int('num_layers', min_value=1  , max_value=5)):
         if counter == 0:
-            model.add( Conv2D(
-                hp.Int('num_filter' , min_value=64  , max_value=128  ) , 
+            model.add( Conv2D(                hp.Int('num_filter' , min_value=64  , max_value=128  ) , 
                 activation=hp.Choice('activation'+ str(i) , values=['relu' , 'sigmoid' , 'tanh']) , 
                 kernel_size=(3,3) , 
                 padding= hp.Choice('padding' + str(i) , values=['valid' , 'same']) , 
@@ -89,13 +86,11 @@ def build_model(hp):
             ))
         model.add(Dropout(hp.Choice('dropout'+str(i), values=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9])))
     model.add(Dense(10, activation='softmax'))
-    
+      
     model.compile(optimizer= hp.Choice('optimizer' , values=['rmsprop' , 'adam' , 'sgd' ,'nadam' ,'adadelta']) ,
                    loss='sparse_categorical_crossentropy', metrics=['accuracy'])
     
     return model
-
-
 
 
 tuner = kt.RandomSearch(build_model , objective='val_accuracy' , max_trials= 5 , directory='my_tuner', project_name='final' )
