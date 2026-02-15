@@ -48,9 +48,9 @@ X_test=ss.transform(X_test)
 
 model = Sequential()
 
-model.add(Dense(6, activation='relu', input_dim=X_train.shape[1]))
-model.add( Dense(6 , activation='relu' ))
-model.add( Dense(1 , activation='sigmoid' ))
+model.add(Dense(6,kernel_initializer='he_uniform',  activation='relu', input_dim=X_train.shape[1]))
+model.add( Dense(6 ,kernel_initializer='he_uniform', activation='relu' ))
+model.add( Dense(1 ,kernel_initializer='glorot_uniform', activation='sigmoid' ))
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.summary()
